@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="id"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script>document.documentElement.classList.add('js');</script>
+<style>
+@layer base {
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { overscroll-behavior: none; }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+
+/* Motion Tokens */
+:root {
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-normal: 400ms;
+  --duration-fast: 200ms;
+}
+
+/* Scroll Reveal Base */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+html.js .reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--duration-normal) var(--ease-out-quint),
+              transform var(--duration-normal) var(--ease-out-quint);
+  will-change: auto;
+}
+
+/* Skill Progress Bar ScaleX */
+.skill-bar-fill {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+/* Project Cards Filtering & Hover */
+.project-card {
+  transition: opacity 300ms var(--ease-out-quint),
+              transform 300ms var(--ease-out-quint);
+}
+
+.project-card.filter-hidden {
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  pointer-events: none;
+}
+
+/* Performant Hero Glow Animation using transform only */
+@keyframes hero-glow-float-1 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(25px, -15px, 0) scale(1.05); }
+}
+
+@keyframes hero-glow-float-2 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-20px, 20px, 0) scale(0.95); }
+}
+
+.animate-hero-glow-1 {
+  animation: hero-glow-float-1 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-hero-glow-2 {
+  animation: hero-glow-float-2 15s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Specific Focus Rings & Micro-interactions */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid #4cd7f6 !important;
+  outline-offset: 2px !important;
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal,
+  html.js .reveal.revealed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+  .skill-bar-fill {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+  .animate-hero-glow-1,
+  .animate-hero-glow-2,
+  .animate-ping,
+  .animate-pulse {
+    animation: none !important;
+  }
+  .project-card {
+    transition: none !important;
+  }
+}
+</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "surface-container-high": "#222a3d", "primary-fixed": "#acedff", "surface-container": "#171f33", "on-primary-fixed": "#001f26", "surface-bright": "#31394d", "on-tertiary-fixed": "#00201c", "error-container": "#93000a", "surface": "#0b1326", "surface-container-low": "#131b2e", "tertiary-fixed-dim": "#4fdbc8", "on-background": "#dae2fd", "surface-variant": "#2d3449", "on-tertiary-container": "#00443c", "on-error-container": "#ffdad6", "tertiary-fixed": "#71f8e4", "on-tertiary": "#003731", "on-surface": "#dae2fd", "on-primary-fixed-variant": "#004e5c", "surface-container-lowest": "#060e20", "primary": "#4cd7f6", "secondary-fixed": "#e1e0ff", "on-error": "#690005", "primary-container": "#06b6d4", "background": "#0b1326", "on-surface-variant": "#bcc9cd", "inverse-on-surface": "#283044", "outline-variant": "#3d494c", "error": "#ffb4ab", "secondary-container": "#3131c0", "tertiary": "#4fdbc8", "secondary-fixed-dim": "#c0c1ff", "inverse-surface": "#dae2fd", "secondary": "#c0c1ff", "inverse-primary": "#00687a", "surface-tint": "#4cd7f6", "on-secondary-fixed-variant": "#2f2ebe", "tertiary-container": "#1abaa8", "outline": "#869397", "on-primary": "#003640", "on-secondary-fixed": "#07006c", "on-tertiary-fixed-variant": "#005048", "on-secondary": "#1000a9", "on-secondary-container": "#b0b2ff", "on-primary-container": "#00424f", "surface-container-highest": "#2d3449", "primary-fixed-dim": "#4cd7f6", "surface-dim": "#0b1326" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "gutter-lg": "2rem", "gutter-sm": "1rem", "space-xl": "2.5rem", "gutter": "1.5rem", "margin-desktop": "3rem", "margin-mobile": "1.25rem", "space-xs": "0.25rem", "margin": "2rem", "space-sm": "0.5rem", "space-lg": "1.5rem" }, "fontFamily": { "body-md": [ "Plus Jakarta Sans" ], "label-code": [ "JetBrains Mono" ], "headline-md": [ "Plus Jakarta Sans" ], "body-sm": [ "Plus Jakarta Sans" ], "display-hero": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ], "code-block": [ "JetBrains Mono" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl-mobile": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "display-hero-mobile": [ "Plus Jakarta Sans" ], "tech-badge": [ "JetBrains Mono" ], "headline-sm": [ "Plus Jakarta Sans" ] }, "fontSize": { "body-md": [ "15px", { "lineHeight": "24px", "fontWeight": "400" } ], "label-code": [ "11px", { "lineHeight": "14px", "fontWeight": "600" } ], "headline-md": [ "22px", { "lineHeight": "30px", "fontWeight": "600" } ], "body-sm": [ "13px", { "lineHeight": "20px", "fontWeight": "400" } ], "display-hero": [ "56px", { "lineHeight": "64px", "fontWeight": "800" } ], "headline-xl": [ "40px", { "lineHeight": "48px", "fontWeight": "700" } ], "code-block": [ "14px", { "lineHeight": "22px", "fontWeight": "400" } ], "headline-lg": [ "28px", { "lineHeight": "36px", "fontWeight": "700" } ], "headline-xl-mobile": [ "30px", { "lineHeight": "38px", "fontWeight": "700" } ], "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "400" } ], "display-hero-mobile": [ "36px", { "lineHeight": "44px", "fontWeight": "800" } ], "tech-badge": [ "12px", { "lineHeight": "16px", "fontWeight": "500" } ], "headline-sm": [ "18px", { "lineHeight": "26px", "fontWeight": "600" } ] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-primary selection:text-on-primary"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="h-16 max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop flex items-center justify-between gap-gutter-sm"><div class="flex items-center gap-space-sm"><img alt="Dev RPL Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbtN8MkXoLXLM_YvVTX5kwZwdXjIXc4xUResugXt-kRQeOJCGZaT6tetnN-Uxr1Iw3nHxJhS3p90rRzEGQqTuo-d9oRId6qfd1wBBt8zYpzXNl3QP0z0CIApadiNDOpERwiub6z2tfeUDYtHsE-xJPvsIDcN3cChP3gWV3fItCEK-34ZAo1i1qLtJ3x4eNgYrGNTydVcgwBn0-evi5hFa0DWfJB2lT1lEwxQlMJF-o2qyCYNiRnIg"/><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Rizky<span class="text-primary">.dev</span></span><span class="hidden sm:inline-flex items-center px-space-xs py-0.5 rounded font-label-code text-label-code bg-surface-container-high text-tertiary">SMK RPL XII</span></div><span class="hidden md:block font-body-sm text-body-sm text-on-surface-variant">Rizky Pratama • Student Software Engineer</span></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 bg-surface-container-lowest/60 rounded-xl">
+<a aria-current="page" class="nav-link px-space-md py-space-xs transition-colors bg-primary-container text-on-primary-container font-semibold rounded-lg" data-path="tentang-section" href="#tentang-section">Tentang</a>
+<a class="nav-link px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="skills-section" href="#skills-section">Skills</a>
+<a class="nav-link px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="proyek-section" href="#proyek-section">Proyek</a>
+<a class="nav-link px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="pengalaman-section" href="#pengalaman-section">Pengalaman</a>
+<a class="nav-link px-space-md py-space-xs rounded-lg font-body-sm text-body-sm text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="kontak-section" href="#kontak-section">Kontak</a>
+</nav><div class="flex items-center gap-space-sm"><a class="hidden sm:inline-flex items-center justify-center px-space-md py-space-xs rounded-lg bg-gradient-to-r from-primary-container to-secondary-container font-body-sm text-body-sm font-semibold text-on-primary shadow-sm hover:brightness-110 transition-all" data-path="kontak" href="#">Hire Me / Magang</a><div class="flex items-center pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbmSNeTLU_pBPsJid3p46m78Raa1R38oaTv4Fxesa6UPGT3itx1-wPolT0CuPgAZn1co-NhOgWQ0PF1hlZDJut5E4K7LbpOUpxIw2RiCyDMM5tdLRZ4PHmkc6RWONYi_oT5bgahNQ9XYKKBz79dZww3eNzYjRZg87rKz3gjnPKO9tfBG-JJGlmqVeWm2pQQMifLlzG83H4Qr7RbGUwmUqH6ssEVbFSoAG0CUqmw_3cA8mWpBPEOgQ"/></div></div></div></header><main class="w-full pt-16 bg-surface min-h-[calc(100vh-4rem)] pb-16 lg:pb-0"><div class="flex flex-col w-full">
+<!-- Top Ambient Glow Accents -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 left-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none animate-hero-glow-1"></div>
+<div class="absolute top-20 right-10 w-80 h-80 bg-secondary-container/15 rounded-full blur-3xl pointer-events-none animate-hero-glow-2"></div>
+<!-- 01. HERO SECTION -->
+<section class="max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop pt-space-lg lg:pt-space-xl pb-space-xl relative z-10" id="tentang-section">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-center">
+<!-- Hero Left Column -->
+<div class="lg:col-span-7 flex flex-col items-start gap-space-md">
+<!-- Status Pill -->
+<div class="reveal inline-flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-container-high/95 border border-outline-variant/30 shadow-sm" data-delay="0">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-ping"></span>
+<span class="w-2 h-2 rounded-full bg-tertiary -ml-3"></span>
+<span class="font-label-code text-label-code text-on-surface tracking-wide">
+              Ready for PKL / Magang Industri &amp; Freelance
+            </span>
+</div>
+<!-- Headline -->
+<div class="reveal space-y-space-xs" data-delay="80">
+<div class="font-label-code text-label-code text-primary tracking-widest uppercase">
+              // Student Software Engineer Portfolio
+            </div>
+<h1 class="font-display-hero text-display-hero-mobile lg:text-display-hero text-on-surface font-extrabold tracking-tight">
+              Halo, saya <span class="bg-gradient-to-r from-primary via-tertiary to-secondary bg-clip-text text-transparent">Rizky Pratama</span> 👨‍💻
+            </h1>
+</div>
+<!-- Subtitle -->
+<p class="reveal font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed" data-delay="160">
+            Siswa SMK Jurusan Rekayasa Perangkat Lunak (RPL) tingkat akhir yang antusias membangun aplikasi web modern performa tinggi, REST API yang tangguh, serta solusi digital yang berdampak nyata.
+          </p>
+<!-- Dual Call to Actions -->
+<div class="reveal flex flex-wrap items-center gap-space-sm pt-space-xs w-full sm:w-auto" data-delay="240">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs px-space-lg py-3 rounded-xl bg-gradient-to-r from-primary-container to-secondary-container font-headline-sm text-headline-sm text-on-primary font-semibold shadow-lg shadow-primary-container/25 hover:brightness-110 active:scale-95 transition-[transform,filter] duration-200" href="#proyek-section">
+<span class="material-symbols-outlined text-lg">folder_special</span>
+<span>Lihat Proyek Saya</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-space-xs px-space-lg py-3 rounded-xl bg-surface-container-high text-on-surface font-headline-sm text-headline-sm font-semibold hover:bg-surface-bright active:scale-95 transition-[transform,background-color] duration-200" href="#kontak-section">
+<span class="material-symbols-outlined text-lg">download_for_offline</span>
+<span>Unduh CV / Kontak</span>
+</a>
+</div>
+<!-- Fast Highlights / Quick Stats -->
+<div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-space-sm w-full mt-space-md pt-space-md bg-surface-container-low/60 p-space-md rounded-2xl border border-outline-variant/20" data-delay="320">
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">3+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Tahun Ngoding</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg text-tertiary font-bold">12+</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Proyek Kelar</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg text-secondary font-bold">3x</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Juara LKS / Hackathon</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-lg text-headline-lg text-primary-fixed font-bold">100%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Siap Kerja Industri</span>
+</div>
+</div>
+</div>
+<!-- Hero Right Column / Visual Presentation -->
+<div class="reveal lg:col-span-5 flex flex-col items-center relative mt-space-md lg:mt-0" data-delay="200">
+<!-- Glassmorphic Photo Card -->
+<div class="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden bg-surface-container shadow-2xl p-space-xs border border-outline-variant/30">
+<img alt="Rizky Pratama - Siswa SMK Rekayasa Perangkat Lunak" class="w-full h-full object-cover rounded-2xl filter brightness-95 contrast-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbmSNeTLU_pBPsJid3p46m78Raa1R38oaTv4Fxesa6UPGT3itx1-wPolT0CuPgAZn1co-NhOgWQ0PF1hlZDJut5E4K7LbpOUpxIw2RiCyDMM5tdLRZ4PHmkc6RWONYi_oT5bgahNQ9XYKKBz79dZww3eNzYjRZg87rKz3gjnPKO9tfBG-JJGlmqVeWm2pQQMifLlzG83H4Qr7RbGUwmUqH6ssEVbFSoAG0CUqmw_3cA8mWpBPEOgQ"/>
+<!-- Floating Badge: Laravel -->
+<div class="absolute top-4 left-4 inline-flex items-center gap-space-xs px-space-sm py-1 rounded-xl bg-surface-container-highest/95 border border-outline-variant/40 shadow-md text-primary">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="font-tech-badge text-tech-badge font-semibold">Laravel 10 • PHP</span>
+</div>
+<!-- Floating Badge: React/Next.js -->
+<div class="absolute bottom-16 right-4 inline-flex items-center gap-space-xs px-space-sm py-1 rounded-xl bg-surface-container-highest/95 border border-outline-variant/40 shadow-md text-tertiary">
+<span class="material-symbols-outlined text-sm">code_blocks</span>
+<span class="font-tech-badge text-tech-badge font-semibold">React • Next.js</span>
+</div>
+<!-- Floating Status Bar Overlay -->
+<div class="absolute bottom-3 left-3 right-3 p-space-sm rounded-xl bg-surface-container-lowest/90 border border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-code text-label-code text-on-surface">SMKN 1 • Kelas XII RPL</span>
+</div>
+<span class="font-label-code text-label-code text-on-surface-variant">GPA 93.4/100</span>
+</div>
+</div>
+<!-- Interactive CLI Terminal Simulator Card -->
+<div class="w-full max-w-md mt-space-sm bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden">
+<div class="px-space-md py-2 bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-error inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-tertiary inline-block"></span>
+</div>
+<span class="font-label-code text-[11px] text-on-surface-variant font-medium">bash - rizky@smk-rpl:~</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant">more_horiz</span>
+</div>
+<div class="p-space-md font-code-block text-code-block text-on-surface space-y-1 bg-surface-container-lowest/90 font-mono">
+<p class="text-on-surface-variant"><span class="text-tertiary">rizky@smk-rpl</span>:<span class="text-primary">~</span>$ cat skills.json</p>
+<p class="text-primary-fixed">{</p>
+<p class="pl-4 text-secondary">"status": <span class="text-tertiary">"Ready_For_Internship"</span>,</p>
+<p class="pl-4 text-secondary">"specialty": <span class="text-tertiary">"Full-Stack Web Dev"</span>,</p>
+<p class="pl-4 text-secondary">"core": [<span class="text-primary">"Laravel"</span>, <span class="text-primary">"React"</span>, <span class="text-primary">"Tailwind"</span>, <span class="text-primary">"MySQL"</span>]</p>
+<p class="text-primary-fixed">}</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- 02. SKILLS BAR & TECH STACK SECTION -->
+<section class="w-full bg-surface-container-lowest py-space-xl relative" id="skills-section">
+<div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop">
+<!-- Section Header -->
+<div class="reveal flex flex-col items-start gap-space-xs mb-space-xl" data-delay="0">
+<span class="font-label-code text-label-code px-space-sm py-1 rounded bg-surface-container text-tertiary uppercase tracking-wider font-semibold">
+          [ 01. KEAHLIAN TEKNIS ]
+        </span>
+<h2 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl text-on-surface font-bold tracking-tight">
+          Skills Bar &amp; Penguasaan Teknologi
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Kompetensi yang telah diuji melalui proyek nyata di sekolah, mini bootcamp, serta sertifikasi keahlian vokasi RPL.
+        </p>
+</div>
+<!-- 3-Column Skills Category Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Frontend Development Column -->
+<div class="reveal bg-surface-container p-space-lg rounded-2xl flex flex-col gap-space-md shadow-md border border-outline-variant/20" data-delay="100">
+<div class="flex items-center gap-space-sm pb-space-xs">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">devices</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Frontend Dev</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Interface &amp; Responsive UI</p>
+</div>
+</div>
+<!-- Skill 1 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">HTML5 &amp; Modern Semantic CSS</span>
+<span class="text-primary font-bold skill-count" data-target="95">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-primary to-tertiary rounded-full" data-percentage="95" style="width: 95%;"></div>
+</div>
+</div>
+<!-- Skill 2 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">JavaScript / TypeScript</span>
+<span class="text-primary font-bold skill-count" data-target="88">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-primary to-tertiary rounded-full" data-percentage="88" style="width: 88%;"></div>
+</div>
+</div>
+<!-- Skill 3 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">React.js &amp; Tailwind CSS</span>
+<span class="text-primary font-bold skill-count" data-target="90">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-primary to-tertiary rounded-full" data-percentage="90" style="width: 90%;"></div>
+</div>
+</div>
+<!-- Skill 4 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">Vue.js Ecosystem</span>
+<span class="text-primary font-bold skill-count" data-target="75">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-primary to-tertiary rounded-full" data-percentage="75" style="width: 75%;"></div>
+</div>
+</div>
+</div>
+<!-- Backend & Database Column -->
+<div class="reveal bg-surface-container p-space-lg rounded-2xl flex flex-col gap-space-md shadow-md border border-outline-variant/20" data-delay="200">
+<div class="flex items-center gap-space-sm pb-space-xs">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container/20 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">database</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Backend &amp; DB</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Server, Logic &amp; Architecture</p>
+</div>
+</div>
+<!-- Skill 1 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">PHP &amp; Laravel Framework</span>
+<span class="text-tertiary font-bold skill-count" data-target="92">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-tertiary to-primary-container rounded-full" data-percentage="92" style="width: 92%;"></div>
+</div>
+</div>
+<!-- Skill 2 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">Node.js &amp; Express.js</span>
+<span class="text-tertiary font-bold skill-count" data-target="80">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-tertiary to-primary-container rounded-full" data-percentage="80" style="width: 80%;"></div>
+</div>
+</div>
+<!-- Skill 3 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">MySQL &amp; PostgreSQL Relational</span>
+<span class="text-tertiary font-bold skill-count" data-target="86">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-tertiary to-primary-container rounded-full" data-percentage="86" style="width: 86%;"></div>
+</div>
+</div>
+<!-- Skill 4 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">RESTful API Architecture &amp; Auth</span>
+<span class="text-tertiary font-bold skill-count" data-target="89">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-tertiary to-primary-container rounded-full" data-percentage="89" style="width: 89%;"></div>
+</div>
+</div>
+</div>
+<!-- Tools & Workflow Column -->
+<div class="reveal bg-surface-container p-space-lg rounded-2xl flex flex-col gap-space-md shadow-md border border-outline-variant/20" data-delay="300">
+<div class="flex items-center gap-space-sm pb-space-xs">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">construction</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Tools &amp; Workflow</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">DevOps, VCS &amp; Prototyping</p>
+</div>
+</div>
+<!-- Skill 1 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">Git &amp; GitHub Version Control</span>
+<span class="text-secondary font-bold skill-count" data-target="90">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-secondary to-primary rounded-full" data-percentage="90" style="width: 90%;"></div>
+</div>
+</div>
+<!-- Skill 2 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">Linux CLI &amp; Docker Basics</span>
+<span class="text-secondary font-bold skill-count" data-target="78">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-secondary to-primary rounded-full" data-percentage="78" style="width: 78%;"></div>
+</div>
+</div>
+<!-- Skill 3 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">Postman API Testing &amp; Docs</span>
+<span class="text-secondary font-bold skill-count" data-target="85">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-secondary to-primary rounded-full" data-percentage="85" style="width: 85%;"></div>
+</div>
+</div>
+<!-- Skill 4 -->
+<div class="space-y-1.5">
+<div class="flex justify-between items-center font-label-code text-label-code">
+<span class="text-on-surface font-semibold">Figma to Responsive Code UI</span>
+<span class="text-secondary font-bold skill-count" data-target="84">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="skill-bar-fill h-full bg-gradient-to-r from-secondary to-primary rounded-full" data-percentage="84" style="width: 84%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Concept Pills & Badges -->
+<div class="reveal mt-space-lg p-space-md rounded-2xl bg-surface-container-low flex flex-wrap items-center justify-between gap-space-sm border border-outline-variant/20" data-delay="350">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Fondasi Rekayasa Perangkat Lunak:</span>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="px-space-sm py-1 rounded bg-surface-container-high font-tech-badge text-tech-badge text-primary">Object Oriented Programming (OOP)</span>
+<span class="px-space-sm py-1 rounded bg-surface-container-high font-tech-badge text-tech-badge text-tertiary">Model-View-Controller (MVC)</span>
+<span class="px-space-sm py-1 rounded bg-surface-container-high font-tech-badge text-tech-badge text-secondary">Clean Architecture Basics</span>
+<span class="px-space-sm py-1 rounded bg-surface-container-high font-tech-badge text-tech-badge text-primary-fixed">CI/CD GitHub Actions</span>
+<span class="px-space-sm py-1 rounded bg-surface-container-high font-tech-badge text-tech-badge text-on-surface-variant">JWT Authentication</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 03. DAFTAR PROYEK PILIHAN -->
+<section class="w-full py-space-xl relative" id="proyek-section">
+<div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop">
+<!-- Section Title & Filter Nav -->
+<div class="reveal flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl" data-delay="0">
+<div class="flex flex-col items-start gap-space-xs">
+<span class="font-label-code text-label-code px-space-sm py-1 rounded bg-surface-container-high text-primary uppercase tracking-wider font-semibold">
+            [ 02. SHOWCASE PROYEK ]
+          </span>
+<h2 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl text-on-surface font-bold tracking-tight">
+            Daftar Proyek Unggulan
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+            Aplikasi fungsional hasil penugasan akhir sekolah, kompetisi LKS, dan inisiatif digital mandiri.
+          </p>
+</div>
+<!-- Filter Pill Buttons (Interactive via inline JS) -->
+<div class="flex flex-wrap items-center gap-space-xs bg-surface-container-lowest p-1 rounded-xl border border-outline-variant/20" id="project-filters">
+<button class="filter-btn active px-space-sm py-1.5 rounded-lg font-label-code text-label-code bg-primary-container text-on-primary font-semibold transition-[background-color,color] duration-200" data-filter="all">
+            Semua (4)
+          </button>
+<button class="filter-btn px-space-sm py-1.5 rounded-lg font-label-code text-label-code text-on-surface-variant hover:text-on-surface transition-[background-color,color] duration-200" data-filter="school">
+            Sistem Sekolah
+          </button>
+<button class="filter-btn px-space-sm py-1.5 rounded-lg font-label-code text-label-code text-on-surface-variant hover:text-on-surface transition-[background-color,color] duration-200" data-filter="webapp">
+            Web Apps &amp; POS
+          </button>
+<button class="filter-btn px-space-sm py-1.5 rounded-lg font-label-code text-label-code text-on-surface-variant hover:text-on-surface transition-[background-color,color] duration-200" data-filter="fintech">
+            Payment / FinTech
+          </button>
+</div>
+</div>
+<!-- Project Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter-lg" id="projects-container">
+<!-- Project 1: Sistem Informasi Akademik -->
+<div class="reveal project-card group flex flex-col bg-surface-container rounded-2xl overflow-hidden shadow-xl hover:-translate-y-1.5 transition-[transform,opacity,box-shadow] duration-300 border border-outline-variant/20" data-category="school" data-delay="100">
+<!-- Terminal Header Bar -->
+<div class="px-space-md py-2.5 bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary inline-block"></span>
+<span class="font-label-code text-label-code text-on-surface-variant ml-2 font-mono">smk-erapor-v2.git</span>
+</div>
+<span class="font-tech-badge text-[10px] px-2 py-0.5 rounded bg-surface-container-lowest text-tertiary font-mono">STABLE v2.4</span>
+</div>
+<!-- Visual Mockup Container -->
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, modern SaaS web dashboard for an Indonesian vocational school academic portal (E-Rapor SMK) showing student grades, attendance metrics, line charts of student performance, dark blue obsidian UI with glowing cyan and indigo accents, professional high-resolution software mockup" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa0Ldx4VM751z6LHkyjIuInw7rgyittBW4vcrTMVJKuXX-TuoE-wt9TeJ6oObpU_VynqV0mu7laNMlNIDvkgvnuYRx0Lkx02ELW4j4i8VjyIvYhcVKiPzJEz-TmboKGJ99M3QIp66oit_t7-J4CirujMPpUnTuMO7JbL76W24jjYOAYCYqwLEMjdUyzlYRoSFHmoZrPMZjyh5g9HbQKIh67JO5-Wl7TV5o-TovBvt31uRf2JqhDhg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+<span class="font-label-code text-label-code px-space-xs py-1 rounded bg-surface-container-highest/95 border border-outline-variant/30 text-primary font-semibold">
+                Sistem Informasi Sekolah
+              </span>
+<span class="font-label-code text-label-code text-on-surface bg-surface-container-high/95 border border-outline-variant/30 px-space-xs py-0.5 rounded">
+                ⭐ Capstone Project
+              </span>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-space-lg flex-1 flex flex-col justify-between gap-space-md">
+<div class="space-y-space-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold group-hover:text-primary transition-colors">
+                Sistem Informasi Akademik &amp; E-Rapor SMK
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Platform otomasi nilai kurikulum merdeka, presensi siswa berbasis QR Scanner real-time, export rapor PDF otomatis, dan dashboard evaluasi pengajar.
+              </p>
+</div>
+<!-- Tech Badges -->
+<div class="flex flex-wrap gap-1.5">
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono">Laravel 10</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-tertiary font-mono">MySQL</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-secondary font-mono">Tailwind CSS</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono">Alpine.js</span>
+</div>
+<!-- Action Buttons -->
+<div class="pt-space-xs flex items-center justify-between gap-space-sm">
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-primary hover:text-tertiary font-semibold transition-colors" href="#">
+<span class="material-symbols-outlined text-base">visibility</span> Live Preview
+              </a>
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-base">code</span> Source Repo
+              </a>
+</div>
+</div>
+</div>
+<!-- Project 2: ApotekKu - POS & Inventaris -->
+<div class="reveal project-card group flex flex-col bg-surface-container rounded-2xl overflow-hidden shadow-xl hover:-translate-y-1.5 transition-[transform,opacity,box-shadow] duration-300 border border-outline-variant/20" data-category="webapp" data-delay="200">
+<!-- Terminal Header Bar -->
+<div class="px-space-md py-2.5 bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary inline-block"></span>
+<span class="font-label-code text-label-code text-on-surface-variant ml-2 font-mono">apotekku-pos.git</span>
+</div>
+<span class="font-tech-badge text-[10px] px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-mono">PRODUCTION READY</span>
+</div>
+<!-- Visual Mockup Container -->
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A modern Point of Sale (POS) and inventory software user interface for an Indonesian pharmacy (ApotekKu), displaying medicine stocks, receipt thermal print preview, barcode scanner trigger, dark themed dark slate UI with vibrant cyan elements and neat table grids" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo8F-y0GHjHlKqz4w9t-FIHXW_UVPM8NPy4jtjBy-f7bf--crl3meU_m_WVkaKzZ1fBVI2bh2XBYQLThU1_6pRSNjfnJ39mW_9AHYTudoR8qkGLDD6nOU0pKG4i1Uwsq0VE7YraVsffamlmEmQ8XaLokGkaxC7GCA8DOgKL5Y4afypijTYBKYHAGbZO_gVUTzStwbie_NlxyS1QWDVbnrLKo8jXwMyWvCMNXNZNA4cHWYvhFKn4HI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+<span class="font-label-code text-label-code px-space-xs py-1 rounded bg-surface-container-highest/95 border border-outline-variant/30 text-tertiary font-semibold">
+                Web App / POS
+              </span>
+<span class="font-label-code text-label-code text-on-surface bg-surface-container-high/95 border border-outline-variant/30 px-space-xs py-0.5 rounded">
+                🏆 Juara 1 LKS
+              </span>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-space-lg flex-1 flex flex-col justify-between gap-space-md">
+<div class="space-y-space-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold group-hover:text-tertiary transition-colors">
+                ApotekKu - POS &amp; Inventaris Farmasi
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Aplikasi Point of Sale lengkap dengan deteksi masa kedaluwarsa obat, pencetakan struk printer thermal bluetooth, dan rekapitulasi laba rugi bulanan.
+              </p>
+</div>
+<!-- Tech Badges -->
+<div class="flex flex-wrap gap-1.5">
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono">React.js</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-tertiary font-mono">Node.js Express</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-secondary font-mono">PostgreSQL</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono">Chart.js</span>
+</div>
+<!-- Action Buttons -->
+<div class="pt-space-xs flex items-center justify-between gap-space-sm">
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-primary hover:text-tertiary font-semibold transition-colors" href="#">
+<span class="material-symbols-outlined text-base">visibility</span> Live Preview
+              </a>
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-base">code</span> Source Repo
+              </a>
+</div>
+</div>
+</div>
+<!-- Project 3: Kantin Digital Siswa (E-Canteen) -->
+<div class="reveal project-card group flex flex-col bg-surface-container rounded-2xl overflow-hidden shadow-xl hover:-translate-y-1.5 transition-[transform,opacity,box-shadow] duration-300 border border-outline-variant/20" data-category="fintech" data-delay="300">
+<!-- Terminal Header Bar -->
+<div class="px-space-md py-2.5 bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary inline-block"></span>
+<span class="font-label-code text-label-code text-on-surface-variant ml-2 font-mono">kantin-qris-smk.git</span>
+</div>
+<span class="font-tech-badge text-[10px] px-2 py-0.5 rounded bg-surface-container-lowest text-secondary font-mono">INTEGRATED PAYMENT</span>
+</div>
+<!-- Visual Mockup Container -->
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="An Indonesian digital canteen web application interface on mobile and tablet screens, showcasing food order menus, QRIS payment barcode popup modal, order queue number status, futuristic dark interface with neon cyan and purple accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALgScY0V2A87AOrRSsk6-BK7SIF9BiDczD1qBmxXRd59N6ZwrkFYRj4pjhejbMJLPCgiW2_pEMXvPHkx_lairty2vENXwLCjTHgHOCQ71BGNh8xfX4Pygwhg_sDR6gXFMSKQkHflZzFv1eqm6s3Ue0RlpLunx9SWCYSeCjJt7ywfkuF3McDlstdPZU_g2DEKOkPtIThiLMzOW5dVQb2c0UKYj7Vd5mo-xDt-6QPI1TSqtyb_P4_L4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+<span class="font-label-code text-label-code px-space-xs py-1 rounded bg-surface-container-highest/95 border border-outline-variant/30 text-secondary font-semibold">
+                FinTech / Midtrans
+              </span>
+<span class="font-label-code text-label-code text-on-surface bg-surface-container-high/95 border border-outline-variant/30 px-space-xs py-0.5 rounded">
+                🚀 Diuji di Sekolah
+              </span>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-space-lg flex-1 flex flex-col justify-between gap-space-md">
+<div class="space-y-space-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold group-hover:text-secondary transition-colors">
+                Kantin Digital Siswa SMK (E-Canteen)
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Solusi antrean kantin sekolah! Pemesanan makanan online terintegrasi payment gateway QRIS Midtrans, antrean nomor otomatis, dan notifikasi pesanan siap via bot Telegram.
+              </p>
+</div>
+<!-- Tech Badges -->
+<div class="flex flex-wrap gap-1.5">
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono">Next.js 14</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-tertiary font-mono">Midtrans Snap API</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-secondary font-mono">Tailwind CSS</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono">Supabase</span>
+</div>
+<!-- Action Buttons -->
+<div class="pt-space-xs flex items-center justify-between gap-space-sm">
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-primary hover:text-tertiary font-semibold transition-colors" href="#">
+<span class="material-symbols-outlined text-base">visibility</span> Live Preview
+              </a>
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-base">code</span> Source Repo
+              </a>
+</div>
+</div>
+</div>
+<!-- Project 4: LokerSMK - Portal Karir & BKK -->
+<div class="reveal project-card group flex flex-col bg-surface-container rounded-2xl overflow-hidden shadow-xl hover:-translate-y-1.5 transition-[transform,opacity,box-shadow] duration-300 border border-outline-variant/20" data-category="school" data-delay="400">
+<!-- Terminal Header Bar -->
+<div class="px-space-md py-2.5 bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary inline-block"></span>
+<span class="font-label-code text-label-code text-on-surface-variant ml-2 font-mono">loker-bkk-vokasi.git</span>
+</div>
+<span class="font-tech-badge text-[10px] px-2 py-0.5 rounded bg-surface-container-lowest text-primary-fixed font-mono">COLLABORATIVE</span>
+</div>
+<!-- Visual Mockup Container -->
+<div class="relative w-full h-56 bg-surface-container-lowest overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean Indonesian vocational job board portal application (Bursa Kerja Khusus SMK) showing company hiring cards, alumni internship matches, student profile view with resume download button, elegant cyber obsidian styling with bright cyan badges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdxZiOhzte1OpHdyjO9AZVSMPs-XQg_tsAyYTwwExDVUqV-S5Lg9sPaRR9nTIGg8zuloIJp9eCGPK2ILu8SpRb9e-ZzMiUqNk6CMzidI7VwQyROCOGqOSP0AGFncxBdhjO-xDJGigzw_iywAa358HKUAu9GzVI8NxX0LsxYsjkNhPi5KjngewWBseH-ndaKt5qn77UJSqy3mrT5woWQvxowsNkAK0TQXuUMfK9crWIhk6vd-1txBU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute bottom-3 left-4 right-4 flex items-center justify-between">
+<span class="font-label-code text-label-code px-space-xs py-1 rounded bg-surface-container-highest/95 border border-outline-variant/30 text-primary-fixed font-semibold">
+                BKK • Karir Vokasi
+              </span>
+<span class="font-label-code text-label-code text-on-surface bg-surface-container-high/95 border border-outline-variant/30 px-space-xs py-0.5 rounded">
+                🤝 Mitra Industri
+              </span>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-space-lg flex-1 flex flex-col justify-between gap-space-md">
+<div class="space-y-space-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold group-hover:text-primary transition-colors">
+                LokerSMK - Portal Karir &amp; BKK Siswa Vokasi
+              </h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Platform Bursa Kerja Khusus (BKK) yang menghubungkan siswa lulusan SMK dengan mitra dunia usaha dan industri kerja (DUDI), lengkap dengan fitur filtering kompetensi keahlian.
+              </p>
+</div>
+<!-- Tech Badges -->
+<div class="flex flex-wrap gap-1.5">
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-primary font-mono">Vue 3</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-tertiary font-mono">Laravel REST API</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-secondary font-mono">Docker</span>
+<span class="font-tech-badge text-tech-badge px-space-sm py-0.5 rounded bg-surface-container-high text-on-surface-variant font-mono">MySQL</span>
+</div>
+<!-- Action Buttons -->
+<div class="pt-space-xs flex items-center justify-between gap-space-sm">
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-primary hover:text-tertiary font-semibold transition-colors" href="#">
+<span class="material-symbols-outlined text-base">visibility</span> Live Preview
+              </a>
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-base">code</span> Source Repo
+              </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 04. PENGALAMAN & PRESTASI TIMELINE -->
+<section class="w-full bg-surface-container-lowest py-space-xl relative" id="pengalaman-section">
+<div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop">
+<!-- Section Header -->
+<div class="reveal flex flex-col items-start gap-space-xs mb-space-xl" data-delay="0">
+<span class="font-label-code text-label-code px-space-sm py-1 rounded bg-surface-container text-secondary uppercase tracking-wider font-semibold">
+          [ 03. JEJAK LANGKAH ]
+        </span>
+<h2 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl text-on-surface font-bold tracking-tight">
+          Pendidikan, Prestasi &amp; Kepemimpinan
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Komitmen berkesinambungan mengasah kapabilitas teknis dan kolaborasi tim dalam lingkungan kompetisi dan project based learning.
+        </p>
+</div>
+<!-- Experience Cards Timeline -->
+<div class="relative pl-6 md:pl-8 space-y-space-lg">
+<!-- Connecting Line Background -->
+<div class="absolute left-2.5 md:left-3.5 top-3 bottom-3 w-0.5 bg-gradient-to-b from-primary via-tertiary to-secondary opacity-40"></div>
+<!-- Timeline Item 1 -->
+<div class="reveal relative group" data-delay="100">
+<div class="absolute -left-[30px] md:-left-[38px] top-1.5 w-6 h-6 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/30">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-pulse"></span>
+</div>
+<div class="bg-surface-container p-space-lg rounded-2xl shadow-lg hover:shadow-primary/10 transition-all border border-outline-variant/20">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-2">
+<div class="flex items-center gap-space-xs flex-wrap">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">
+                  Siswa Jurusan Rekayasa Perangkat Lunak (RPL)
+                </h3>
+<span class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary font-label-code text-label-code">Aktif</span>
+</div>
+<span class="font-label-code text-label-code text-tertiary font-mono">2022 — Sekarang (Kelas XII)</span>
+</div>
+<p class="font-headline-sm text-body-md text-on-surface-variant font-medium mb-space-xs">
+              SMK Negeri 1 • Konsentrasi Web Development &amp; Software Engineering
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Mempelajari konsep rekayasa sistem perangkat lunak, algoritma pemrograman, perancangan database relasional, pengujian keamanan sistem dasar, dan implementasi arsitektur RESTful. Menjaga nilai rata-rata kejuruan 93.4.
+            </p>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="reveal relative group" data-delay="200">
+<div class="absolute -left-[30px] md:-left-[38px] top-1.5 w-6 h-6 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/30">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span>
+</div>
+<div class="bg-surface-container p-space-lg rounded-2xl shadow-lg hover:shadow-tertiary/10 transition-all border border-outline-variant/20">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-2">
+<div class="flex items-center gap-space-xs flex-wrap">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">
+                  Juara 1 Lomba Kompetensi Siswa (LKS) Web Technologies
+                </h3>
+<span class="px-space-xs py-0.5 rounded bg-tertiary-container/20 text-tertiary font-label-code text-label-code">Penghargaan</span>
+</div>
+<span class="font-label-code text-label-code text-tertiary font-mono">Tahun 2023</span>
+</div>
+<p class="font-headline-sm text-body-md text-on-surface-variant font-medium mb-space-xs">
+              Dinas Pendidikan • Tingkat Kota / Wilayah
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Mengerjakan modul Full-stack Web Development di bawah batas waktu kompetitif 8 jam: integrasi database dinamis, authentication logic, real-time interface dengan CSS murni &amp; vanilla JS, serta deployment siap saji.
+            </p>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="reveal relative group" data-delay="300">
+<div class="absolute -left-[30px] md:-left-[38px] top-1.5 w-6 h-6 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant/30">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+</div>
+<div class="bg-surface-container p-space-lg rounded-2xl shadow-lg hover:shadow-secondary/10 transition-all border border-outline-variant/20">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-2">
+<div class="flex items-center gap-space-xs flex-wrap">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">
+                  Lead Programmer &amp; Scrum Coordinator Mini Bootcamp
+                </h3>
+<span class="px-space-xs py-0.5 rounded bg-secondary-container/20 text-secondary font-label-code text-label-code">Kepemimpinan</span>
+</div>
+<span class="font-label-code text-label-code text-secondary font-mono">Agustus — November 2023</span>
+</div>
+<p class="font-headline-sm text-body-md text-on-surface-variant font-medium mb-space-xs">
+              Project Kolaboratif Capstone Sekolah
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Memimpin tim sprint berisi 4 siswa RPL untuk merancang dan mendistribusikan aplikasi manajemen inventaris dan presensi digital. Mengelola Git repository, code review, pull request, serta pembagian tugas modul frontend dan backend.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 05. FORM KONTAK & KONEKSI MAGANG (2-COLUMN) -->
+<section class="w-full py-space-xl relative overflow-hidden" id="kontak-section">
+<div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop">
+<!-- Section Header -->
+<div class="reveal flex flex-col items-start gap-space-xs mb-space-xl" data-delay="0">
+<span class="font-label-code text-label-code px-space-sm py-1 rounded bg-surface-container-high text-tertiary uppercase tracking-wider font-semibold">
+          [ 04. HUBUNGI SAYA ]
+        </span>
+<h2 class="font-headline-xl text-headline-xl-mobile lg:text-headline-xl text-on-surface font-bold tracking-tight">
+          Tertarik Kolaborasi, Magang, atau Konsultasi Proyek?
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Saya siap menerima tawaran Magang Industri (PKL), penempatan on-site / remote, serta pengerjaan proyek freelance pembuatan website dan REST API.
+        </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter-lg items-start">
+<!-- Left Column: Contact Information Cards -->
+<div class="reveal lg:col-span-5 flex flex-col gap-space-md" data-delay="100">
+<!-- Direct Details Card -->
+<div class="bg-surface-container p-space-lg rounded-2xl shadow-xl flex flex-col gap-space-md border border-outline-variant/20">
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">
+              Informasi Ketersediaan
+            </h3>
+<div class="space-y-space-sm">
+<!-- Item 1: Email -->
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">mail</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant font-mono">// email_address</span>
+<a class="font-headline-sm text-body-md text-on-surface font-semibold hover:text-primary transition-colors" href="mailto:rizky.dev.rpl@gmail.com">
+                    rizky.dev.rpl@gmail.com
+                  </a>
+</div>
+</div>
+<!-- Item 2: WhatsApp -->
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-tertiary-container/20 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">chat</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant font-mono">// direct_chat</span>
+<a class="font-headline-sm text-body-md text-on-surface font-semibold hover:text-tertiary transition-colors" href="https://wa.me/6281234567890" target="_blank">
+                    +62 812-3456-7890 (WhatsApp)
+                  </a>
+</div>
+</div>
+<!-- Item 3: Location -->
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">location_on</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant font-mono">// lokasi_domisili</span>
+<span class="font-headline-sm text-body-md text-on-surface font-semibold">
+                    Indonesia • Bersedia Relokasi / Remote
+                  </span>
+</div>
+</div>
+<!-- Item 4: Status PKL -->
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary-fixed flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">event_available</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-code text-label-code text-on-surface-variant font-mono">// status_magang</span>
+<span class="font-headline-sm text-body-md text-tertiary font-semibold">
+                    Terbuka Periode PKL Semester 5 &amp; 6
+                  </span>
+</div>
+</div>
+</div>
+<!-- Download Official Resume / CV -->
+<div class="pt-space-xs">
+<a class="w-full inline-flex items-center justify-center gap-space-xs px-space-md py-3 rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-body-md font-semibold transition-[background-color,transform] duration-200 active:scale-95 shadow-sm border border-outline-variant/30" href="#">
+<span class="material-symbols-outlined text-xl text-primary">description</span>
+<span>Download Portofolio PDF &amp; Curriculum Vitae</span>
+</a>
+</div>
+</div>
+<!-- Quick FAQ / Note Box -->
+<div class="p-space-md rounded-2xl bg-surface-container-low flex items-start gap-space-sm border border-outline-variant/20">
+<span class="material-symbols-outlined text-tertiary mt-0.5">verified_user</span>
+<div class="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">
+<strong class="text-on-surface">Surat Pengantar Sekolah:</strong> Telah difasilitasi oleh BKK SMK Negeri 1 dan siap diterbitkan kapan saja untuk keperluan verifikasi administrasi HRD perusahaan.
+            </div>
+</div>
+</div>
+<!-- Right Column: Sleek Contact Form with Terminal-Style Aesthetics -->
+<div class="reveal lg:col-span-7 bg-surface-container p-space-lg rounded-2xl shadow-xl relative border border-outline-variant/20" data-delay="200">
+<!-- Terminal Title Indicator inside form -->
+<div class="flex items-center justify-between pb-space-md mb-space-md bg-surface-container border-b border-outline-variant/20">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-error inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary inline-block"></span>
+<span class="font-label-code text-label-code text-on-surface font-mono ml-2">dispatch_message.php</span>
+</div>
+<span class="font-label-code text-[11px] text-primary font-mono">// Encrypted &amp; Fast Response</span>
+</div>
+<form class="space-y-space-md" id="portfolio-contact-form" onsubmit="event.preventDefault(); handleFormSubmit();">
+<!-- Full Name -->
+<div class="space-y-1.5">
+<label class="block font-label-code text-label-code text-on-surface-variant font-mono" for="form-name">
+                // 01. nama_lengkap_atau_instansi
+              </label>
+<input class="w-full px-space-md py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline border border-outline-variant/30 focus:border-primary/60 focus:ring-2 focus:ring-primary/30 transition-[border-color,box-shadow,background-color] duration-200 outline-none font-body-md" id="form-name" placeholder="Contoh: Bpk. Hendra (PT Digital Solusi)" required="" type="text"/>
+</div>
+<!-- Email or WhatsApp -->
+<div class="space-y-1.5">
+<label class="block font-label-code text-label-code text-on-surface-variant font-mono" for="form-contact">
+                // 02. email_atau_kontak_whatsapp
+              </label>
+<input class="w-full px-space-md py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline border border-outline-variant/30 focus:border-primary/60 focus:ring-2 focus:ring-primary/30 transition-[border-color,box-shadow,background-color] duration-200 outline-none font-body-md" id="form-contact" placeholder="email@perusahaan.com atau +62812xxxx" required="" type="text"/>
+</div>
+<!-- Subject / Inquiry Purpose -->
+<div class="space-y-1.5">
+<label class="block font-label-code text-label-code text-on-surface-variant font-mono" for="form-purpose">
+                // 03. kategori_keperluan
+              </label>
+<select class="w-full px-space-md py-3 rounded-xl bg-surface-container-lowest text-on-surface border border-outline-variant/30 focus:border-primary/60 focus:ring-2 focus:ring-primary/30 transition-[border-color,box-shadow,background-color] duration-200 outline-none font-body-md" id="form-purpose">
+<option value="magang">Tawaran Magang Industri / PKL Siswa</option>
+<option value="freelance">Penawaran Proyek Freelance / Pembuatan Web</option>
+<option value="fulltime">Rekrutmen Karyawan Lulusan Baru (Fresh Graduate)</option>
+<option value="diskusi">Diskusi Teknis / Networking Coding</option>
+</select>
+</div>
+<!-- Message Body -->
+<div class="space-y-1.5">
+<label class="block font-label-code text-label-code text-on-surface-variant font-mono" for="form-message">
+                // 04. detail_pesan_dan_timeline
+              </label>
+<textarea class="w-full px-space-md py-3 rounded-xl bg-surface-container-lowest text-on-surface placeholder:text-outline border border-outline-variant/30 focus:border-primary/60 focus:ring-2 focus:ring-primary/30 transition-[border-color,box-shadow,background-color] duration-200 outline-none font-body-md resize-y" id="form-message" placeholder="Tuliskan gambaran proyek, kriteria posisi magang, atau pertanyaan yang ingin didiskusikan..." required="" rows="4"></textarea>
+</div>
+<!-- Submit Button -->
+<div class="pt-space-xs">
+<button class="w-full inline-flex items-center justify-center gap-space-xs px-space-lg py-3.5 rounded-xl bg-gradient-to-r from-primary-container via-tertiary-container to-secondary-container font-headline-sm text-headline-sm text-on-primary font-bold shadow-lg shadow-primary-container/20 hover:brightness-110 active:scale-[0.98] transition-[transform,filter] duration-200" id="submit-btn" type="submit">
+<span class="material-symbols-outlined text-xl">rocket_launch</span>
+<span>Kirim Pesan Sekarang</span>
+</button>
+</div>
+<!-- Feedback Notice Container -->
+<div class="hidden p-space-md rounded-xl bg-tertiary-container/20 border border-tertiary/40 text-tertiary font-body-sm text-body-sm text-center transition-all duration-300" id="form-feedback">
+              ✓ Terima kasih! Pesan Anda telah terkirim. Rizky akan merespons melalui email/WhatsApp dalam waktu 1x24 jam.
+            </div>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive JavaScript for Animations, Scrollspy, and Forms -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Scroll Reveal with IntersectionObserver
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = parseInt(entry.target.getAttribute('data-delay') || "0", 10);
+            setTimeout(() => {
+              entry.target.classList.add('revealed');
+            }, delay);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: "0px 0px -10% 0px", threshold: 0.1 });
+      
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      // 2. Skill Bars & Counter Animation
+      const skillFills = document.querySelectorAll('.skill-bar-fill');
+      const skillObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const bar = entry.target;
+            const percentage = parseInt(bar.getAttribute('data-percentage') || "0", 10);
+            
+            // Animate bar width (via scaleX)
+            bar.style.transform = `scaleX(${percentage / 100})`;
+            
+            // Find and animate counter
+            const container = bar.closest('.space-y-1\\.5');
+            const counter = container ? container.querySelector('.skill-count') : null;
+            
+            if (counter) {
+              const target = parseInt(counter.getAttribute('data-target') || "0", 10);
+              const duration = 800;
+              const startTime = performance.now();
+              
+              const updateCounter = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // easeOutQuart formula for smooth deceleration
+                const easeOut = 1 - Math.pow(1 - progress, 4);
+                
+                const currentVal = Math.floor(easeOut * target);
+                counter.innerText = currentVal + '%';
+                
+                if (progress < 1) {
+                  requestAnimationFrame(updateCounter);
+                } else {
+                  counter.innerText = target + '%';
+                }
+              };
+              requestAnimationFrame(updateCounter);
+            }
+            observer.unobserve(bar);
+          }
+        });
+      }, { rootMargin: "0px 0px -5% 0px", threshold: 0.1 });
+      
+      skillFills.forEach(bar => skillObserver.observe(bar));
+
+      // 3. Smooth Project Filtering
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Toggle active button style
+          filterButtons.forEach(b => {
+            b.classList.remove('bg-primary-container', 'text-on-primary', 'font-semibold');
+            b.classList.add('text-on-surface-variant');
+          });
+          btn.classList.add('bg-primary-container', 'text-on-primary', 'font-semibold');
+          btn.classList.remove('text-on-surface-variant');
+
+          const selectedFilter = btn.getAttribute('data-filter');
+
+          // Smooth layout transition for cards
+          projectCards.forEach(card => {
+             const category = card.getAttribute('data-category');
+             const isMatch = selectedFilter === 'all' || category === selectedFilter;
+             
+             if (!isMatch) {
+                card.classList.add('filter-hidden');
+                setTimeout(() => { 
+                   if (card.classList.contains('filter-hidden')) {
+                       card.style.display = 'none'; 
+                   }
+                }, 300);
+             } else {
+                card.style.display = 'flex';
+                // Force layout reflow before removing hidden class
+                card.offsetHeight;
+                card.classList.remove('filter-hidden');
+             }
+          });
+        });
+      });
+
+      // 4. Scrollspy for Navigation Links
+      const sections = document.querySelectorAll("section[id]");
+      const desktopNavLinks = document.querySelectorAll(".nav-link");
+      const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+      const navObserver = new IntersectionObserver((entries) => {
+        let activeId = null;
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            activeId = entry.target.id;
+          }
+        });
+        
+        if (activeId) {
+          desktopNavLinks.forEach(link => {
+            if (link.getAttribute("href") === `#${activeId}`) {
+              link.classList.add('bg-primary-container', 'text-on-primary-container', 'font-semibold');
+              link.classList.remove('text-on-surface-variant', 'hover:bg-surface-container-high', 'hover:text-on-surface');
+            } else {
+              link.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-semibold');
+              link.classList.add('text-on-surface-variant', 'hover:bg-surface-container-high', 'hover:text-on-surface');
+            }
+          });
+
+          mobileNavLinks.forEach(link => {
+            if (link.getAttribute("href") === `#${activeId}`) {
+              link.classList.add('text-primary', 'font-semibold');
+              link.classList.remove('text-on-surface-variant', 'hover:text-on-surface');
+            } else {
+              link.classList.remove('text-primary', 'font-semibold');
+              link.classList.add('text-on-surface-variant', 'hover:text-on-surface');
+            }
+          });
+        }
+      }, { rootMargin: "-40% 0px -60% 0px" });
+
+      sections.forEach(sec => navObserver.observe(sec));
+    });
+
+    // 5. Form Submission Simulator
+    function handleFormSubmit() {
+      const submitBtn = document.getElementById('submit-btn');
+      const feedback = document.getElementById('form-feedback');
+      const form = document.getElementById('portfolio-contact-form');
+      
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-xl">progress_activity</span><span>Mengirim Pesan...</span>';
+
+      setTimeout(() => {
+        feedback.classList.remove('hidden');
+        feedback.classList.add('block');
+        submitBtn.innerHTML = '<span class="material-symbols-outlined text-xl">check</span><span>Terkirim!</span>';
+        form.reset();
+        
+        setTimeout(() => {
+           feedback.classList.add('hidden');
+           feedback.classList.remove('block');
+           submitBtn.disabled = false;
+           submitBtn.innerHTML = '<span class="material-symbols-outlined text-xl">rocket_launch</span><span>Kirim Pesan Sekarang</span>';
+        }, 5000);
+      }, 1200);
+    }
+  </script>
+</div></main><div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/90 backdrop-blur-xl border-t border-outline-variant/30 shadow-[0_-2px_12px_rgba(0,0,0,0.4)]"><nav class="grid grid-cols-5 h-14 max-w-md mx-auto items-center px-space-xs"><a aria-current="page" class="mobile-nav-link flex flex-col items-center justify-center transition-colors text-primary font-semibold" data-path="tentang-section" href="#tentang-section"><span class="material-symbols-outlined text-xl">person</span><span class="font-label-code text-[10px]">Tentang</span></a><a class="mobile-nav-link flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="skills-section" href="#skills-section"><span class="material-symbols-outlined text-xl">terminal</span><span class="font-label-code text-[10px]">Skills</span></a><a class="mobile-nav-link flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="proyek-section" href="#proyek-section"><span class="material-symbols-outlined text-xl">folder_code</span><span class="font-label-code text-[10px]">Proyek</span></a><a class="mobile-nav-link flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="pengalaman-section" href="#pengalaman-section"><span class="material-symbols-outlined text-xl">history_edu</span><span class="font-label-code text-[10px]">Karir</span></a><a class="mobile-nav-link flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface transition-colors" data-path="kontak-section" href="#kontak-section"><span class="material-symbols-outlined text-xl">mail</span><span class="font-label-code text-[10px]">Kontak</span></a></nav></div><footer class="w-full bg-surface-container-low mt-space-xl py-space-xl"><div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin-desktop flex flex-col md:flex-row items-center justify-between gap-space-lg"><div class="flex flex-col items-center md:items-start gap-space-xs"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-on-surface">Rizky Pratama</span><span class="font-tech-badge text-tech-badge px-space-xs py-0.5 rounded bg-surface-container-highest text-tertiary">SMK RPL</span></div><p class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-left">© 2024 Rizky Pratama. Pelajar Rekayasa Perangkat Lunak. All rights reserved.</p></div><div class="flex items-center gap-space-sm font-label-code text-label-code px-space-md py-space-xs rounded-full bg-surface-container-highest/60 text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span><span>Built with Tailwind &amp; Love</span></div><div class="flex items-center gap-space-md"><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="tentang-section" href="#tentang-section">Tentang</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="skills-section" href="#skills-section">Skills</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="proyek-section" href="#proyek-section">Proyek</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="pengalaman-section" href="#pengalaman-section">Pengalaman</a><a class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors" data-path="kontak-section" href="#kontak-section">Kontak</a></div></div></footer></body></html>
